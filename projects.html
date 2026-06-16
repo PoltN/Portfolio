@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projets — Emilio Cagnot</title>
+  <meta name="description" content="12 projets de chef de projet digital, UX/UI et stratégie — Emilio Cagnot." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta property="og:title" content="Projets — Emilio Cagnot" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="description" content="Projets de chef de projet digital, UX/UI et stratégie d'Emilio Cagnot." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .filters {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+      margin-top: 2rem;
+    }
+    .filter-btn {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      padding: 5px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--fg-muted);
+      cursor: none;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
+
+    /* TIER 1 — Projets phares */
+    .project-full {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .project-full:last-child { border-bottom: none; }
+    .project-meta { position: sticky; top: 78px; }
+    .project-num {
+      font-size: 56px;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      color: var(--bg-3);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+    .project-full-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--fg-faint);
+      margin-bottom: 0.75rem;
+    }
+    .project-full-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .project-full-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 1.5rem; }
+    .project-context { display: flex; flex-direction: column; gap: 5px; padding-top: 1.25rem; border-top: 1px solid var(--border); }
+    .ctx-line { font-family: var(--mono); font-size: 11px; color: var(--fg-muted); line-height: 1.6; }
+    .ctx-line strong { color: var(--fg); }
+    .project-body { font-size: 14px; color: var(--fg-muted); line-height: 1.85; }
+    .project-body p + p { margin-top: 1rem; }
+    .project-body strong { color: var(--fg); font-weight: 600; }
+    .project-body ul { padding-left: 1.25rem; margin-top: 0.75rem; }
+    .project-body li { margin-bottom: 0.4rem; }
+    .project-visual {
+      width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+    .project-visual img { width: 100%; display: block; transition: filter 0.4s; filter: grayscale(10%); }
+    .project-visual:hover img { filter: grayscale(0%); }
+
+    /* TIER 2 — grid 2 cols */
+    .tier2-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 1px;
+    }
+    .tier2-card {
+      background: var(--bg-1);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: background 0.2s;
+    }
+    .tier2-card:hover { background: var(--bg-2); }
+    .tier2-num { font-size: 32px; font-weight: 800; color: var(--bg-3); letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.25rem; }
+    .tier2-tag { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--fg-faint); }
+    .tier2-title { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+    .tier2-desc { font-size: 13px; color: var(--fg-muted); line-height: 1.65; }
+    .tier2-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; padding-top: 0.75rem; }
+
+    /* TIER 3 — liste compacte */
+    .tier3-section { margin-top: 4rem; }
+    .tier3-label { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--fg-faint); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
+    .tier3-label::before { content: ''; display: block; width: 18px; height: 1px; background: var(--fg-faint); }
+    .tier3-list { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .tier3-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 1.5rem;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+      background: var(--bg-1);
+      transition: background 0.2s;
+    }
+    .tier3-item:last-child { border-bottom: none; }
+    .tier3-item:hover { background: var(--bg-2); }
+    .tier3-num { font-family: var(--mono); font-size: 11px; color: var(--fg-faint); letter-spacing: 0.05em; }
+    .tier3-body { }
+    .tier3-title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .tier3-desc { font-size: 12px; color: var(--fg-muted); line-height: 1.5; }
+    .tier3-pills { display: flex; gap: 5px; flex-wrap: wrap; }
+
+    .section-divider {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--fg-faint);
+      padding: 3rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-divider::before { content: ''; display: block; width: 18px; height: 1px; background: var(--fg-faint); }
+
+    @media (max-width: 768px) {
+      .project-full { grid-template-columns: 1fr; }
+      .project-meta { position: static; }
+      .tier2-grid { grid-template-columns: 1fr; }
+      .tier3-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+
+
+
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logo-final.png" alt="Emilio Cagnot" />
+    </a>
+    <div class="nav-links">
+      <a href="projects.html" data-i18n="nav.projects">Projects</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-social">
+        <a href="mailto:cagnot.emilio@gmail.com" title="Gmail" target="_blank">
+          <img src="assets/icons/gmail.svg" alt="Gmail" />
+        </a>
+        <a href="https://linkedin.com/in/emilio-cagnot-821759236/" title="LinkedIn" target="_blank" rel="noopener">
+          <img src="assets/icons/linkedin.svg" alt="LinkedIn" />
+        </a>
+        <a href="https://github.com/PoltN" title="GitHub" target="_blank" rel="noopener">
+          <img src="assets/icons/github.svg" alt="GitHub" />
+        </a>
+      </div>
+      <div class="badge-available"><span class="dot"></span><span data-i18n="nav.available">Available Sept. 2026</span></div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+<div class="container">
+
+  <div class="page-header reveal">
+    <h1 data-i18n="projectsTitle">Projects</h1>
+    <p data-i18n="projectsIntro">At HETIC, la pédagogie repose sur des projets concrets, menés en conditions réelles — parfois directement avec de vrais clients. Ce portfolio regroupe 12 projets réalisés sur 3 ans : appels d'offres en conditions agence, missions clients directes, créations solo de A à Z. Une approche hybride qui mêle stratégie, design et code.</p>
+  </div>
+
+  <div class="filters reveal">
+    <button class="filter-btn active" data-filter="all" data-i18n="filterAll">All</button>
+    <button class="filter-btn" data-filter="ux" data-i18n="filterUX">UX / Design</button>
+    <button class="filter-btn" data-filter="strategy" data-i18n="filterStrategy">Strategy</button>
+    <button class="filter-btn" data-filter="dev" data-i18n="filterDev">Dev</button>
+    <button class="filter-btn" data-filter="branding" data-i18n="filterBranding">Branding</button>
+  </div>
+
+  <!-- ═══ TIER 1 — PROJETS PHARES ═══ -->
+  <p class="section-divider" data-i18n="tier1Label">Featured projects</p>
+
+  <!-- 01 BALL'N CONNECT -->
+  <div class="project-full reveal" id="ballnconnect" data-tags="ux strategy">
+    <div class="project-meta">
+      <div class="project-num">01</div>
+      <p class="project-full-tag">UX/UI · Mobile · Real client</p>
+      <h2 class="project-full-title">Ball'N Connect — Redesign V2</h2>
+      <div class="project-full-pills">
+        <span class="pill">Figma</span><span class="pill">FlutterFlow</span><span class="pill">ASO</span><span class="pill">UX Research</span><span class="pill">User stories</span><span class="pill">Notion</span>
+      </div>
+      <div class="project-context">
+        <div class="ctx-line"><strong>School:</strong> HETIC 2025</div>
+        <div class="ctx-line"><strong>Format:</strong> Team of 4, 2 months</div>
+        <div class="ctx-line"><strong>Client:</strong> Ball'N Connect — 57,000 members, Tony Parker partnership</div>
+        <div class="ctx-line"><strong>Role:</strong> Product, UX/UI, FlutterFlow</div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p>Full redesign of the community basketball mobile app — from audit to deployed FlutterFlow prototype.</p>
+      <p><strong>Analysis & scoping:</strong> UX/UI audit of existing app, KPI analysis, App Store/Play Store reviews, benchmark of 4 competitors. Functional spec and user stories.</p>
+      <p><strong>New features:</strong></p>
+      <ul>
+        <li>Playground/clan system and seasonal leaderboard</li>
+        <li>GPS court presence and court-based chat</li>
+        <li>Ball'N coaching module</li>
+        <li>Ball'N Pro subscription (€2.99/month)</li>
+      </ul>
+      <p><strong>FlutterFlow development:</strong> 11 screens — onboarding, interactive map, profile, leaderboard, coaching, statistics.</p>
+      <p><strong>ASO:</strong> 100+ keywords, App Store visuals 1290×2796px, acquisition strategy TikTok/referral/Nike-Adidas.</p>
+      <div class="project-visual">
+        <img src="assets/ballnconnect-mockup.png" alt="Ball'N Connect — Mockup" />
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 BETCLIC -->
+  <div class="project-full reveal" id="betclic" data-tags="ux">
+    <div class="project-meta">
+      <div class="project-num">02</div>
+      <p class="project-full-tag">UX/UI · Sport · Agency pitch</p>
+      <h2 class="project-full-title">Betclic — Live Redesign</h2>
+      <div class="project-full-pills">
+        <span class="pill">Figma</span><span class="pill">UX Writing</span><span class="pill">Prototypage</span>
+      </div>
+      <div class="project-context">
+        <div class="ctx-line"><strong>School:</strong> HETIC 2025</div>
+        <div class="ctx-line"><strong>Format:</strong> Team of 4, 1 week</div>
+        <div class="ctx-line"><strong>Type:</strong> Real agency pitch response</div>
+        <div class="ctx-line"><strong>Role:</strong> UX, prototyping, pitch</div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p>Redesign of the Betclic Live experience. Full delivery in one week under agency conditions: brief → audit → design → prototype → budget → jury pitch.</p>
+      <p><strong>"Base Match" concept:</strong> Integrated video stream + real-time score + dynamic contextual bets + community chat + player stats. High-fidelity prototype on 3 sports (basketball, football, tennis) in Betclic brand guidelines.</p>
+      <p><strong>Full delivery:</strong> UX Writing for live betting context, budget with 2 pricing options, design planning with client validation milestones.</p>
+
+    </div>
+  </div>
+
+  <!-- 03 BEAMS V2 -->
+  <div class="project-full reveal" id="beams" data-tags="branding strategy">
+    <div class="project-meta">
+      <div class="project-num">03</div>
+      <p class="project-full-tag">Branding · E-commerce · Solo</p>
+      <h2 class="project-full-title">Beams — D2C Brand</h2>
+      <div class="project-full-pills">
+        <span class="pill">Shopify</span><span class="pill">Lovable</span><span class="pill">Figma</span><span class="pill">Illustrator</span><span class="pill">Canva</span>
+      </div>
+      <div class="project-context">
+        <div class="ctx-line"><strong>School:</strong> HETIC 2025 → 2026 (V2)</div>
+        <div class="ctx-line"><strong>Format :</strong> Solo, 2 mois</div>
+        <div class="ctx-line"><strong>Product:</strong> Connected portable projectors</div>
+        <div class="ctx-line"><strong>Role:</strong> Everything — branding, product, tech, marketing</div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p>Complete D2C brand creation from scratch, with a live e-commerce site.</p>
+      <p><strong>Market opportunity:</strong> 4 simultaneous tensions — TV cost, shrinking living spaces, streaming boom, plug-and-play expectations.</p>
+      <p><strong>3-product range:</strong> ClearVision €89 / ClearVision+ €129 / ClearVision Pro €179. Alibaba sourcing, D2C dropshipping.</p>
+      <p><strong>Visual identity:</strong> Adobe Illustrator logo, Blue Lagoon #38B6FF palette, Sugo Display + Telegraf typography, full brandbook.</p>
+      <p><strong>Financial model:</strong> Fixed cost ~€60/month, break-even at 1 sale/month, margin ~€80/sale. Month 6 → ~76 sales, profit ~€3,798.</p>
+      <div class="project-visual">
+        <img src="assets/beams-hero.jpg" alt="Beams — Hero Section" />
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 ATELIER GAMBETTA -->
+  <div class="project-full reveal" id="gambetta" data-tags="ux strategy">
+    <div class="project-meta">
+      <div class="project-num">04</div>
+      <p class="project-full-tag">Strategy · Retention · Real client</p>
+      <h2 class="project-full-title">Atelier Gambetta — Post-sale Retention</h2>
+      <div class="project-full-pills">
+        <span class="pill">Figma</span><span class="pill">Canva</span><span class="pill">Notion</span><span class="pill">GitHub Pages</span>
+      </div>
+      <div class="project-context">
+        <div class="ctx-line"><strong>School:</strong> HETIC 2026</div>
+        <div class="ctx-line"><strong>Format:</strong> Team of 4, 2 months</div>
+        <div class="ctx-line"><strong>Client:</strong> Atelier Gambetta — 1,000+ signs/year</div>
+        <div class="ctx-line"><strong>Role:</strong> Project Manager, strategist, client liaison</div>
+      </div>
+    </div>
+    <div class="project-body">
+      <p>Transform Atelier Gambetta from a one-off supplier into a lasting partner — generating recurring post-installation revenue.</p>
+      <p><strong>3 solutions designed and approved by the client:</strong></p>
+      <ul>
+        <li><strong>3-click Diagnostic</strong> — web app to identify a fault + automatic quote. QR code on each sign. Figma prototype + PDF template.</li>
+        <li><strong>Client Dashboard</strong> — real-time manufacturing tracking, seasonal suggestions, messaging.</li>
+        <li><strong>Seasonal Calendar</strong> — seasonal window stickers with countdown (Christmas, Easter, Sales).</li>
+      </ul>
+      <p>In-person meetings at Romainville. All 3 solutions were approved by the client.</p>
+
+      <div class="stat-card">
+        <div class="stat-card-item"><div class="stat-card-n">3</div><div class="stat-card-l">Solutions approved</div></div>
+        <div class="stat-card-item"><div class="stat-card-n">1975</div><div class="stat-card-l">Founded</div></div>
+        <div class="stat-card-item"><div class="stat-card-n">1 000+</div><div class="stat-card-l">Signs / year</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TIER 2 — PROJETS SOLIDES ═══ -->
+  <p class="section-divider" data-i18n="tier2Label">Key projects</p>
+
+  <div class="tier2-grid">
+
+    <!-- 05 TALENTSYNC -->
+    <div class="tier2-card reveal" id="talentsync" data-tags="strategy">
+      <div class="tier2-num">05</div>
+      <p class="tier2-tag">Growth · SaaS B2B · HETIC 2026</p>
+      <p class="tier2-title">TalentSync — AARRR</p>
+      <p class="tier2-desc">Full AARRR framework on a fictional B2B SaaS. CAC, LTV, MRR, ARR modeling. Restructured pricing (Foundation €179 / Growth €299), pessimistic/realistic/optimistic financial scenarios.</p>
+      <div class="tier2-pills">
+        <span class="pill">AARRR</span><span class="pill">Excel</span><span class="pill">Pricing</span><span class="pill">Modélisation</span>
+      </div>
+    </div>
+
+    <!-- 06 ENEDIS -->
+    <div class="tier2-card reveal reveal-d1" id="enedis" data-tags="ux">
+      <div class="tier2-num">06</div>
+      <p class="tier2-tag">Design Sprint · Solo · HETIC 2026</p>
+      <p class="tier2-title">Enedis — Linky App</p>
+      <p class="tier2-desc">5-day solo sprint. Minimal app to manage Linky energy consumption. Benchmark of 7 solutions, integrated eco-design, 15+ Figma screens, user testing before presentation.</p>
+      <div class="tier2-pills">
+        <span class="pill">Figma</span><span class="pill">Éco-conception</span><span class="pill">Tests utilisateurs</span>
+      </div>
+    </div>
+
+    <!-- 07 ORANGE BUSINESS -->
+    <div class="tier2-card reveal" id="orange" data-tags="strategy branding">
+      <div class="tier2-num">07</div>
+      <p class="tier2-tag">Strategy · B2B · Epitech 2024</p>
+      <p class="tier2-title">Orange Business — Repositioning</p>
+      <p class="tier2-desc">Reposition Orange Business as the leader of B2B digital transformation. €500K budget. DSI Awards, "Le Podcast Numérique" podcast, urban outdoor campaign (subverted metro map).</p>
+      <div class="tier2-pills">
+        <span class="pill">Canva</span><span class="pill">Suite Adobe</span><span class="pill">Stratégie</span>
+      </div>
+    </div>
+
+    <!-- 08 2048 -->
+    <div class="tier2-card reveal reveal-d1" id="game2048" data-tags="dev">
+      <div class="tier2-num">08</div>
+      <p class="tier2-tag">Dev · Solo · HETIC 2026</p>
+      <p class="tier2-title">2048 — Fullstack Game</p>
+      <p class="tier2-desc">Reproduction of the 2048 game in Next.js/React. Full algorithmic logic (merges, 4-direction matrix rotations), custom 3×3 mode, REST score API, persistent JSON leaderboard.</p>
+      <div class="tier2-pills">
+        <span class="pill">React</span><span class="pill">Next.js</span><span class="pill">TypeScript</span><span class="pill">Tailwind</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ TIER 3 — PROJETS COMPLÉMENTAIRES ═══ -->
+  <div class="tier3-section">
+    <p class="tier3-label" data-i18n="tier3Label">Additional projects</p>
+    <div class="tier3-list">
+
+      <!-- 09 GUIDE INCLUSION -->
+      <div class="tier3-item reveal" data-tags="ux">
+        <div class="tier3-num">09 — HETIC 2025</div>
+        <div class="tier3-body">
+          <div class="tier3-title">Visual Digital Inclusion Guide</div>
+          <div class="tier3-desc">20-page solo report. Web accessibility audit of 2 non-profits (Écoute IVG, CEREP Phymentin). WCAG, inclusive design, concrete recommendations.</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          <a href="assets/Guide_Inclusion_Numerique.pdf" class="project-action" style="margin-top:0;" target="_blank" rel="noopener">↓ Télécharger le PDF</a>
+          <span class="pill">UX Research</span><span class="pill">Accessibilité</span><span class="pill">WCAG</span>
+        </div>
+      </div>
+
+      <!-- 10 POKEDEX -->
+      <div class="tier3-item reveal" data-tags="dev">
+        <div class="tier3-num">10 — Epitech 2024</div>
+        <div class="tier3-body">
+          <div class="tier3-title">Pokédex — React Web App</div>
+          <div class="tier3-desc">Full React app consuming PokéAPI (151 Pokémon). Dynamic search by name and type, detail popup (stats, shiny sprites), colored types with icons, multi-component architecture.</div>
+        </div>
+        <div class="tier3-pills">
+          <span class="pill">React</span><span class="pill">Axios</span><span class="pill">PokéAPI</span><span class="pill">JavaScript ES6+</span><span class="pill">CSS3</span>
+        </div>
+      </div>
+
+      <!-- 11 ILLUSTRATOR -->
+      <div class="tier3-item reveal" data-tags="branding">
+        <div class="tier3-num">11 — HETIC 2026</div>
+        <div class="tier3-body">
+          <div class="tier3-title">Self-taught Illustrator</div>
+          <div class="tier3-desc">12 progressive projects: gorilla logo, clipped portrait, clipping mask, moonlit wolf, mock-up, typography, icons, visual identity. Method documented in an Obsidian vault.</div>
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:0.75rem;">
+            <span class="pill">Illustrator</span>
+            <span class="pill">Obsidian</span>
+            <span class="pill">Vectoriel</span>
+            <a href="#" class="project-action" style="margin-top:0; padding:3px 10px; font-size:10px; font-family:var(--mono); font-weight:500;">Voir les créations →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</main>
+  </div>
+
+</div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="nav-logo" style="text-decoration:none;">
+      <img src="logo-final.png" alt="EC" style="height:24px;width:auto;" />
+    </a>
+    <div class="footer-links">
+      <a href="projects.html" data-i18n="nav.projects">Projects</a>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
+      <a href="mailto:cagnot.emilio@gmail.com">cagnot.emilio@gmail.com</a>
+      <a href="https://linkedin.com/in/emilio-cagnot-821759236/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/PoltN" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <span class="footer-copy" data-i18n="footerCopy">© 2026 Emilio Cagnot</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+// Filter logic
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('[data-tags]').forEach(el => {
+      if (filter === 'all' || el.dataset.tags.includes(filter)) {
+        el.style.display = '';
+      } else {
+        el.style.display = 'none';
+      }
+    });
+  });
+});
+</script>
+
+
+
+
+<script>
+const illusImages = [
+  { src: 'assets/illus-icons.png',    alt: 'Vector icons — 40+ shapes' },
+  { src: 'assets/illus-noidea.png',   alt: 'Typographic poster — NO IDEA' },
+  { src: 'assets/illus-halftone.png', alt: 'Halftone exploration' },
+  { src: 'assets/illus-wolf.png',     alt: 'Moonlit wolf' },
+  { src: 'assets/illus-planet.png',   alt: 'Planet system' },
+];
+let currentIndex = 0;
+
+function openLightbox(i) {
+  currentIndex = i;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function updateLightbox() {
+  document.getElementById('lightbox-img').src = illusImages[currentIndex].src;
+  document.getElementById('lightbox-img').alt = illusImages[currentIndex].alt;
+  document.getElementById('lightbox-counter').textContent = (currentIndex + 1) + ' / ' + illusImages.length;
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleLightboxClick(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+function navLightbox(dir, e) {
+  if (e) e.stopPropagation();
+  currentIndex = (currentIndex + dir + illusImages.length) % illusImages.length;
+  updateLightbox();
+}
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'Escape')     closeLightbox();
+  if (e.key === 'ArrowLeft')  navLightbox(-1);
+  if (e.key === 'ArrowRight') navLightbox(1);
+});
+
+// Filter logic
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('[data-tags]').forEach(el => {
+      el.style.display = (filter === 'all' || el.dataset.tags.includes(filter)) ? '' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>
