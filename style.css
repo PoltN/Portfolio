@@ -102,7 +102,7 @@ nav {
   gap: 8px;
   text-decoration: none;
 }
-.nav-logo img { height: 28px; width: auto; display: block; }
+.nav-logo img { height: 42px; width: auto; display: block; }
 .nav-logo-text {
   font-family: var(--display);
   font-size: 16px;
